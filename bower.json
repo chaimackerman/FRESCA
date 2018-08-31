@@ -1,19 +1,23 @@
 {
-  "name": "fresca",
-  "version": "0.2.1",
-  "homepage": "https://github.com/fluentdesk/FRESCA",
+  "name": "fresh-resume-schema",
+  "version": "1.0.0-beta",
+  "homepage": "https://github.com/fresh-standard/fresh-resume-schema",
   "authors": [
-    "devlinjd <james@indevious.com>"
+    "hacksalot <hacksalot@indevious.com>"
   ],
   "description": "The FRESH schema for resumes and CVs.",
-  "main": "schema/fresh-resume-schema.json",
+  "main": "schema/fresh-resume-schema_1.0.0-beta.json",
   "keywords": [
     "resume",
+    "résumé",
     "CV",
+    "FRESCA",
     "FRESH",
+    "HackMyResume",
     "FluentCV",
     "schema",
-    "JSON"
+    "JSON",
+    "employment"
   ],
   "license": "MIT",
   "ignore": [

@@ -6,20 +6,25 @@
   "properties": {
 
 
+
     "name": {
       "type": "string",
-      "description": "Your name as it should appear on the resume.",
+      "description": "The candidate's name as it should appear on the resume.",
       "required": true
     },
+
 
 
     "meta": {
       "type": "object",
       "additionalProperties": true,
+      "required": true,
+      "description": "The 'meta' section contains metadata information for the resume, including the resume version, schema, and any other fields required by tools.",
       "properties": {
         "format": {
           "type": "string",
-          "description": "The canonical resume format and version. Should be 'FRESH@0.1.0'."
+          "description": "The canonical resume format and version. Should be 'FRESH@0.1.0'.",
+          "required": true
         },
         "version": {
           "type": "string",
@@ -29,10 +34,11 @@
     },
 
 
+
     "info": {
       "type": "object",
       "additionalProperties": true,
-      "required": true,
+      "description": "The 'info' section contains basic summary information for the candidate, including an optional label or job title, candidate photo, summary, and quote.",
       "properties": {
         "label": {
           "type": "string",
@@ -58,9 +64,11 @@
     },
 
 
+
     "disposition": {
       "type": "object",
       "additionalProperties": true,
+      "description": "The disposition section describes the candidate's overall attitude towards new employment opportunities including: travel, relocation, schedule, desired type of work, and the like.",
       "properties": {
 
         "travel": {
@@ -113,9 +121,11 @@
     },
 
 
+
     "contact": {
       "type": "object",
       "additionalProperties": true,
+      "description": "The 'contact' section contains the candidate's contact information, including phone numbers, emails, websites, IMs, and custom contact types.",
       "properties": {
 
         "email": {
@@ -148,9 +158,9 @@
                 "description": "A label for this contact information."
               },
 
-              "flavor": {
+              "category": {
                 "type": "string",
-                "description": "The flavor of contact information: email, phone, url, postal, or IM."
+                "description": "Type of contact information: email, phone, url, postal, or IM."
               },
 
               "value": {
@@ -164,8 +174,10 @@
     },
 
 
+
     "location": {
       "type": "object",
+      "description": "The 'location' section, when present, contains the candidate's location and address info.",
       "additionalProperties": true,
       "properties": {
 
@@ -197,8 +209,10 @@
     },
 
 
+
     "employment": {
       "type": "object",
+      "description": "The 'employment' section describes the candidate's formal employment history.",
       "additionalProperties": true,
       "properties": {
 
@@ -223,8 +237,7 @@
 
               "position": {
                 "type": "string",
-                "description": "Your position or formal job title.",
-                "required": true
+                "description": "Your position or formal job title."
               },
 
               "url": {
@@ -236,8 +249,7 @@
               "start": {
                 "type": "string",
                 "description": "Date you began work, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
-                "format": "date",
-                "required": true
+                "format": "date"
               },
 
               "end": {
@@ -258,17 +270,17 @@
                 "items": {
                   "type": "string",
                   "description": "For ex, 'Led 5-person development team, increasing profits by 50% year-over-year'."
-                },
-
-                "location": {
-                  "type": "string",
-                  "description": "Freeform location of the job or position, e.g., 'San Francisco, CA' or 'Tokyo'."
                 }
+              },
+
+              "location": {
+                "type": "string",
+                "description": "Freeform location of the job or position, e.g., 'San Francisco, CA' or 'Tokyo'."
               },
 
               "keywords": {
                 "type": "array",
-                "description": "Skills and/or keywords used on this position.",
+                "description": "Keywords associated with this position.",
                 "additionalItems": false,
                 "items": {
                   "type": "string",
@@ -282,9 +294,124 @@
     },
 
 
+
+    "projects": {
+      "type": "array",
+      "additionalItems": false,
+      "description": "The 'projects' section describes the candidate's project history -- not the jobs the candidate has worked but the specific projects and enterprises the candidate has created or been involved in, whether paid or unpaid.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+
+          "title": {
+            "type": "string",
+            "description": "Project name or code-name.",
+            "required": true
+          },
+
+          "category": {
+            "type": "string",
+            "description": "Project type: open-source, private, side project, etc."
+          },
+
+          "description": {
+            "type": "string",
+            "description": "Project description or summary."
+          },
+
+          "summary": {
+            "type": "string",
+            "description": "A summary of your achievements and responsibilities on the project."
+          },
+
+          "role": {
+            "type": "string",
+            "description": "Your role on the project: Contributor, Creator, etc."
+          },
+
+          "url": {
+            "type": "string",
+            "description": "Project URL.",
+            "format": "uri"
+          },
+
+          "media": {
+            "type": "array",
+            "additionalItems": false,
+            "description": "Media associated with this project.",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "category": {
+                  "type": "string",
+                  "description": "Media category: image, thumbnail, screenshot, MP3, download, etc.",
+                  "required": true
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Friendly media name."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Media link, path, or location."
+                }
+              }
+            }
+          },
+
+          "repo": {
+            "type": "string",
+            "description": "Repo URL.",
+            "format": "uri"
+          },
+
+          "start": {
+            "type": "string",
+            "description": "Date your involvement with project began, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
+            "format": "date"
+          },
+
+          "end": {
+            "type": "string",
+            "description": "Date your involvement with project ended, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
+            "format": "date"
+          },
+
+          "highlights": {
+            "type": "array",
+            "description": "Noteworthy project-related achievements and/or highlights.",
+            "additionalItems": false,
+            "items": {
+              "type": "string",
+              "description": "For ex, 'Led 5-person development team, increasing profits by 50% year-over-year'."
+            }
+          },
+
+          "location": {
+            "type": "string",
+            "description": "Freeform location of the job or position, e.g., 'San Francisco, CA' or 'Tokyo'."
+          },
+
+          "keywords": {
+            "type": "array",
+            "description": "Keywords associated with this project.",
+            "additionalItems": false,
+            "items": {
+              "type": "string",
+              "description": "For example, C++, HTML, HIPAA, etc."
+            }
+          }
+        }
+      }
+    },
+
+
+
     "skills": {
       "type": "object",
-      "description": "List of professional skills and technologies.",
+      "description": "A description of the candidate's formal skills and capabilities.",
       "additionalProperties": true,
       "properties": {
 
@@ -358,8 +485,10 @@
     },
 
 
+
     "service": {
       "type": "object",
+      "description": "The 'service' section describes the candidate's overall service history in the true sense of the word 'service': volunteer work, military participation, civilian core, rescue and emergency services, and the like.",
       "additionalProperties": true,
       "properties": {
 
@@ -376,7 +505,7 @@
             "additionalProperties": true,
             "properties": {
 
-              "flavor": {
+              "category": {
                 "type": "string",
                 "description": "The type of service work, such as volunteer or military."
               },
@@ -389,8 +518,7 @@
 
               "position": {
                 "type": "string",
-                "description": "Your position or formal service role.",
-                "required": true
+                "description": "Your position or formal service role."
               },
 
               "url": {
@@ -402,8 +530,7 @@
               "start": {
                 "type": "string",
                 "description": "Date you joined the organization, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
-                "format": "date",
-                "required": true
+                "format": "date"
               },
 
               "end": {
@@ -427,6 +554,16 @@
                 }
               },
 
+              "keywords": {
+                "type": "array",
+                "description": "Keywords associated with this service.",
+                "additionalItems": false,
+                "items": {
+                  "type": "string",
+                  "description": "For example, C++, HTML, HIPAA, etc."
+                }
+              },
+
               "location": {
                 "type": "string",
                 "description": "Freeform location of the position, e.g., 'San Francisco, CA' or 'Tokyo'."
@@ -438,9 +575,11 @@
     },
 
 
+
     "education": {
       "type": "object",
       "additionalProperties": true,
+      "description": "The 'employment' section describes the candidate's formal education, including college and university, continuing education, and standalone programs and courses.",
       "properties": {
 
         "summary": {
@@ -467,6 +606,11 @@
             "additionalProperties": true,
             "properties": {
 
+              "title": {
+                "type": "string",
+                "description": "A freeform title for this education stint. Typically, this should be the short name of your degree, certification, or training."
+              },
+
               "institution": {
                 "type": "string",
                 "description": "College or school name.",
@@ -485,14 +629,13 @@
 
               "start": {
                 "type": "string",
-                "description": "Date your schooling began, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
-                "format": "date",
-                "required": true
+                "description": "Date this schooling began, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
+                "format": "date"
               },
 
               "end": {
                 "type": "string",
-                "description": "Date your schooling ended, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
+                "description": "Date this schooling ended, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
                 "format": "date"
               },
 
@@ -522,6 +665,26 @@
                 "description": "A short summary of this education experience."
               },
 
+              "keywords": {
+                "type": "array",
+                "description": "Keywords associated with this education stint.",
+                "additionalItems": false,
+                "items": {
+                  "type": "string",
+                  "description": "For example, C++, HTML, HIPAA, etc."
+                }
+              },
+
+              "highlights": {
+                "type": "array",
+                "description": "Noteworthy achievements and/or highlights.",
+                "additionalItems": false,
+                "items": {
+                  "type": "string",
+                  "description": "For ex, 'Graduated *summa cum laude*'."
+                }
+              },
+
               "location": {
                 "type": "string",
                 "description": "Freeform location of the education, e.g., 'San Francisco, CA' or 'Tokyo'."
@@ -533,9 +696,10 @@
     },
 
 
+
     "social": {
       "type": "array",
-      "description": "Specify any number of social networks that you participate in",
+      "description": "The 'social' section describes the candidate's participation in internet and social networking services and communities including GitHub, FaceBook, and the like.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -570,16 +734,17 @@
     },
 
 
+
     "recognition": {
       "type": "array",
-      "description": "Public or professional recognition, kudos, and awards.",
+      "description": "The 'recognition' section describes the candidate's public or professional plaudits, kudos, awards, and other forms of positive external reinforcement.",
       "additionalItems": false,
       "items": {
         "type": "object",
         "additionalProperties": true,
         "properties": {
 
-          "flavor": {
+          "category": {
             "type": "string",
             "description": "Type of recognition: award, honor, prize, etc."
           },
@@ -593,14 +758,12 @@
           "date": {
             "type": "string",
             "description": "Date awarded, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
-            "format": "date",
-            "required": true
+            "format": "date"
           },
 
           "from": {
             "type": "string",
-            "description": "Name of the awarding company, insitution, or individual.",
-            "required": true
+            "description": "Name of the awarding company, insitution, or individual."
           },
 
           "summary": {
@@ -618,9 +781,10 @@
     },
 
 
+
     "writing": {
       "type": "array",
-      "description": "Writing and publications.",
+      "description": "The 'writing' section describes the candidate's writing and publication history, from blogs and essays to novels and dissertations.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -633,7 +797,7 @@
             "required": true
           },
 
-          "flavor": {
+          "category": {
             "type": "string",
             "description": "One of 'book', 'article', 'essay', 'blog post', or 'series'."
           },
@@ -659,8 +823,8 @@
 
           "date": {
             "type": "string",
-            "description": "Publication date in YYYY, YYYY-MM, or YYYY-MM-DD format.",
-            "required": true
+            "format": "date",
+            "description": "Publication date in YYYY, YYYY-MM, or YYYY-MM-DD format."
           },
 
           "url": {
@@ -676,9 +840,11 @@
       }
     },
 
+
+
     "reading": {
       "type": "array",
-      "description": "Books, blogs, and magazines read.",
+      "description": "The 'reading' section describes the candidate's reading habits and is intended to demonstrate familiarity with industry-relevant publications, blogs, books, or other media that a competent industry candidate should be expected to know.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -687,12 +853,13 @@
 
           "title": {
             "type": "string",
-            "description": "Title of the book, blog, or article."
+            "description": "Title of the book, blog, or article.",
+            "required": true
           },
 
-          "flavor": {
+          "category": {
             "type": "string",
-            "description": "One of: book, article, blog, magazine, series, etc."
+            "description": "The type of reading: book, article, blog, magazine, series, etc."
           },
 
           "url": {
@@ -709,26 +876,41 @@
               "type": "string",
               "description": "Author name."
             }
+          },
+
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Publication date in YYYY, YYYY-MM, or YYYY-MM-DD format."
+          },
+
+          "summary": {
+            "type": "string",
+            "description": "A brief description of the book, magazine, etc."
           }
+
         }
       }
     },
 
+
+
     "speaking": {
       "type": "array",
       "additionalItems": false,
+      "section": "The 'speaking' section describes the candidate's speaking engagements and presentations.",
       "items": {
         "type": "object",
         "additionalProperties": true,
         "properties": {
           "title": {
             "type": "string",
-            "description": "Speaking engagement title.",
-            "required": true
+            "description": "Speaking engagement title."
           },
           "event": {
             "type": "string",
-            "description": "Event at which you presented."
+            "description": "Event at which you presented.",
+            "required": true
           },
           "location": {
             "type": "string",
@@ -737,8 +919,7 @@
           "date": {
             "type": "string",
             "description": "Presentation date.",
-            "format": "date",
-            "required": true
+            "format": "date"
           },
           "highlights": {
             "type": "array",
@@ -746,16 +927,32 @@
             "additionalItems": false,
             "items": {
               "type": "string",
-              "description": "For ex, 'Won 'Best Speaker' award at 2012 E3 expo'."
+              "description": "An array of specific highlights such as 'Won 'Best Speaker' award at 2012 E3 expo'."
             }
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Keywords associated with this speaking engagement.",
+            "additionalItems": false,
+            "items": {
+              "type": "string",
+              "description": "A list of keywords such as 'TED', 'E3', 'mathematics', 'Big Data', etc."
+            }
+          },
+          "summary": {
+            "type": "string",
+            "description": "A description of this speaking engagement."
           }
         }
       }
     },
 
+
+
     "governance": {
       "type": "array",
       "additionalItems": false,
+      "description": "The 'governance' section describes the candidate's leadership, standards, board, and committee roles.",
       "items": {
         "type": "object",
         "additionalProperties": true,
@@ -766,7 +963,7 @@
             "description": "Summary of your governance at this organization."
           },
 
-          "flavor": {
+          "category": {
             "type": "string",
             "description": "Type of governance: committee, board, standards group, etc."
           },
@@ -778,14 +975,14 @@
 
           "organization": {
             "type": "string",
-            "description": "The organization."
+            "description": "The organization.",
+            "required": true
           },
 
           "start": {
             "type": "string",
             "description": "Start date.",
-            "format": "date",
-            "required": true
+            "format": "date"
           },
 
           "end": {
@@ -794,13 +991,23 @@
             "format": "date"
           },
 
+          "keywords": {
+            "type": "array",
+            "description": "Keywords associated with this governance stint.",
+            "additionalItems": false,
+            "items": {
+              "type": "string",
+              "description": "For example, C++, CRM, HIPAA."
+            }
+          },
+
           "highlights": {
             "type": "array",
             "description": "Noteworthy achievements and/or highlights.",
             "additionalItems": false,
             "items": {
               "type": "string",
-              "description": "For ex, 'Led 5-person development team, increasing profits by 50% year-over-year'."
+              "description": "For ex, 'Increased company profits by 35% year over year'."
             }
           }
 
@@ -808,9 +1015,11 @@
       }
     },
 
+
+
     "languages": {
       "type": "array",
-      "description": "Languages spoken by the candidate.",
+      "description": "The 'languages' section describes the candidate's knowledge of world languages such as English, Spanish, or Chinese.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -837,9 +1046,10 @@
     },
 
 
+
     "samples": {
       "type": "array",
-      "description": "Work samples and portfolio pieces.",
+      "description": "The 'samples' section provides an accessible demonstration of the candidate's portfolio or work product to potential employers and co-workers.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -867,15 +1077,37 @@
             "type": "string",
             "description": "Date the sample was released in YYYY, YYYY-MM, or YYYY-MM-DD format.",
             "format": "date"
+          },
+
+          "highlights": {
+            "type": "array",
+            "description": "Noteworthy achievements and/or highlights for this sample.",
+            "additionalItems": false,
+            "items": {
+              "type": "string",
+              "description": "For ex, 'Implemented optimized search algorithm dervied from Slices of Pi'."
+            }
+          },
+
+          "keywords": {
+            "type": "array",
+            "description": "Keywords associated with this work sample.",
+            "additionalItems": false,
+            "items": {
+              "type": "string",
+              "description": "For example, C++, HTML, game."
+            }
           }
+
         }
       }
     },
 
 
+
     "references": {
       "type": "array",
-      "description": "Your personal, professional, and/or technical references.",
+      "description": "The 'references' section describes the candidate's personal, professional, and/or technical references.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -886,6 +1118,26 @@
             "type": "string",
             "description": "The full name of the person giving the reference.",
             "required": true
+          },
+
+          "role": {
+            "type": "string",
+            "description": "The occupation of this reference, or his or her relationship to the candidate."
+          },
+
+          "category": {
+            "type": "string",
+            "description": "The type of reference, eg, professional, technical, or personal."
+          },
+
+          "private": {
+            "type": "boolean",
+            "description": "Is this a private reference?"
+          },
+
+          "summary": {
+            "type": "string",
+            "description": "Optional summary information for this reference."
           },
 
           "contact": {
@@ -901,9 +1153,9 @@
                   "description": "Friendly label for this piece of contact info."
                 },
 
-                "flavor": {
+                "category": {
                   "type": "string",
-                  "description": "Flavor of contact information (phone, email, web, etc.)."
+                  "description": "Type of contact information (phone, email, web, etc.)."
                 },
 
                 "value": {
@@ -918,9 +1170,10 @@
     },
 
 
+
     "testimonials": {
       "type": "array",
-      "description": "Public testimonials of your work and character.",
+      "description": "The 'testimonials' section contains public testimonials of the candidate's professionalism and character.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -935,10 +1188,11 @@
 
           "quote": {
             "type": "string",
+            "required": true,
             "description": "A quoted reference, eg, 'Susan was an excellent team leader, manager, and operations specialist with a great eye for detail. I'd gladly hire her again if I could!'"
           },
 
-          "flavor": {
+          "category": {
             "type": "string",
             "description": "Type of reference: personal, professional, or technical."
           },
@@ -952,9 +1206,11 @@
     },
 
 
+
     "interests": {
       "type": "array",
       "additionalItems": false,
+      "description": "The 'interests' section provides a sampling of the candidate's interests and enthusiasms outside of work.",
       "items": {
         "type": "object",
         "additionalProperties": true,
@@ -973,6 +1229,7 @@
           "keywords": {
             "type": "array",
             "additionalItems": false,
+            "description": "Keywords associated with this interest.",
             "items": {
               "type": "string",
               "description": "A keyword relating to this interest."
@@ -982,8 +1239,11 @@
       }
     },
 
+
+
     "extracurricular": {
       "type": "array",
+      "description": "The 'extracurricular' section describes the candidate's involvement with industry-related events and enterprises outside of work. For example: attending conferences, workshops, or meetups.",
       "additionalItems": false,
       "items": {
         "type": "object",
@@ -991,11 +1251,13 @@
         "properties": {
           "title": {
             "type": "string",
-            "description": "Title of the extracurricular activity."
+            "description": "Title of the extracurricular activity.",
+            "required": true
           },
           "activity": {
             "type": "string",
-            "description": "The extracurricular activity."
+            "description": "The extracurricular activity.",
+            "required": true
           },
           "location": {
             "type": "string",
@@ -1004,8 +1266,7 @@
           "start": {
             "type": "string",
             "description": "Start date.",
-            "format": "date",
-            "required": true
+            "format": "date"
           },
           "end": {
             "type": "string",
@@ -1013,6 +1274,97 @@
             "format": "date"
           }
         }
+      }
+    },
+
+
+
+    "affiliation": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "The 'affiliation' section describes the candidate's membership in groups, clubs, organizations, and professional associations whether at the collegiate, corporate, or personal level.",
+      "properties": {
+
+        "summary": {
+          "type": "string",
+          "description": "Optional summary of overall affiliation and membership experience."
+        },
+
+        "history": {
+          "type": "array",
+          "additionalItems": false,
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+
+              "category": {
+                "type": "string",
+                "description": "The type of affiliation: club, union, meetup, etc."
+              },
+
+              "organization": {
+                "type": "string",
+                "description": "The name of the organization or group.",
+                "required": true
+              },
+
+              "role": {
+                "type": "string",
+                "description": "Your role in the organization or group."
+              },
+
+              "url": {
+                "type": "string",
+                "description": "Organization website.",
+                "format": "uri"
+              },
+
+              "start": {
+                "type": "string",
+                "description": "Date your affiliation with the organization began, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
+                "format": "date"
+              },
+
+              "end": {
+                "type": "string",
+                "description": "Date your affiliation with the organization ended, in YYYY, YYYY-MM, or YYYY-MM-DD format.",
+                "format": "date"
+              },
+
+              "summary": {
+                "type": "string",
+                "description": "A summary of your achievements and responsibilities during this affiliation."
+              },
+
+              "highlights": {
+                "type": "array",
+                "description": "Noteworthy achievements and/or highlights.",
+                "additionalItems": false,
+                "items": {
+                  "type": "string",
+                  "description": "For ex, 'Served on board of directors of national non-profit organization with 20,000 members.'."
+                }
+              },
+
+              "keywords": {
+                "type": "array",
+                "description": "Keywords associated with this affiliation.",
+                "additionalItems": false,
+                "items": {
+                  "type": "string",
+                  "description": "For example, C++, CRM, HIPAA."
+                }
+              },
+
+              "location": {
+                "type": "string",
+                "description": "Freeform location of the position, e.g., 'San Francisco, CA' or 'Tokyo'."
+              }
+            }
+          }
+        }
+
       }
     }
 

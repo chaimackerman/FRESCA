@@ -1,16 +1,15 @@
-FRESCA
+The FRESH Resume Schema
 ======
-*The FRESH Résumé & Employment Schema*
+*A rational schema for your résumé or CV. Based on [FRESH][f].*
 
-The [FRESH][fresh] résumé schema is an open source, standards-friendly,
+The [FRESH résumé schema][fresh] is an open source, standards-friendly,
 JSON/YAML-driven format for résumé / CVs and other employment artifacts.
 
 - [**View the official FRESH schema document.**][schema]
 - [**View a sample FRESH resume.**][exemplar]
 
-FRESH is supported as a native format by both [FluentCV Desktop][fluentcv] and
-[Command Line][npm] and can be trivially converted to and from
-[JSON Resume][jrs].
+FRESH is supported natively by [HackMyResume][hmr] and can be trivially
+converted to and from the [JSON Resume][jrs] format.
 
 ## What It Does
 
@@ -25,11 +24,14 @@ YAML...
   "info": { /* Basic info */ },
   "contact": { /* Contact information */ },
   "location": { /* Location / address */ },
-  "meta": { /* Resume metadata */ },  
+  "meta": { /* Resume metadata */ },
   "employment": { /* Employment history */ },
+  "projects": [ /* Project history */ ],
   "skills": [ /* Skills and technologies */ ],
   "education": { /* Schools, training, certifications */ },
+  "affiliation": { /* Clubs, groups, and associations */ },
   "service": { /* Volunteer, military, civilian service */ },
+  "disposition": { /* Disposition towards work, relocation, schedule */ },
   "writing": [ /* Writing, blogging, and publications */ ],
   "reading": [ /* Books and publication a la StackOverflow Careers */ ],
   "speaking": [ /* Writing, blogging, and publications */ ],
@@ -40,22 +42,19 @@ YAML...
   "references": [ /* Candidate references */ ],
   "testimonials": [ /* Public candidate testimonials */ ],  
   "extracurricular": [ /* Interests & hobbies */ ],
-  "interests": [ /* Interests & hobbies */ ]
+  "interests": [ /* Interests & hobbies */ ],
+  "languages": [ /* languages spoken */ ]
 }
 ```
 
-..which you can use to generate resumes and other career artifacts in specific
+...which you can use to generate resumes and other career artifacts in specific
 concrete formats (HTML, LaTeX, Markdown, PDF, etc.) as well as enable
-21st-century analysis of your resume and career data...
-
-![](http://fluentdesk.com/img/fluentcv_desktop_alpha.png)
-
-...in a way that's not possible with traditional, 20th-century resume tools and
-formats.
+21st-century analysis of your resume and career data in a way that's not
+possible with traditional, 20th-century resume tools and formats.
 
 ## Anatomy of a FRESH Resume
 
-FRESCA resumes are:
+FRESH resumes are:
 
 - Text-based.
 - Versionable.
@@ -70,10 +69,12 @@ FRESCA resumes are:
 
 The FRESH resume schema is licensed under MIT. Go crazy.
 
-[fresh]: https://github.com/fluentdesk/FRESH
+[f]: https://freshstandard.org
+[hmr]: https://fluentdesk.com/hackmyresume
+[fresh]: https://resume.freshstandard.org
 [schema]: schema/fresh-resume-schema.json
 [cli]: https://www.npmjs.com/package/fluentcv
-[fluentcv]: http://fluentdesk.com/fluentcv
+[fluentcv]: https://fluentdesk.com/fluentcv
 [jrs]: http://jsonresume.org
 [exemplar]: https://github.com/fluentdesk/jane-q-fullstacker/blob/master/resume/jane-resume.json
 [npm]: https://www.npmjs.com/package/fluentcv
